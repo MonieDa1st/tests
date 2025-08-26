@@ -56,15 +56,6 @@
 				},
 				"url": {
 					"raw": "{{baseUrl}}/payment/check",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"API",
-						"public",
-						"payment",
-						"check"
-					]
 				}
 			},
 			"response": []

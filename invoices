@@ -58,7 +58,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://api-with-bugs.practicesoftwaretesting.com/invoices/1",
+					"raw": "https://api-with-bugs.practicesoftwaretesting.com/invoices/{{invoice_id}}",
 					"protocol": "https",
 					"host": [
 						"api-with-bugs",

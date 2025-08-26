@@ -55,9 +55,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/payment/check",
+					"raw": "https://api-with-bugs.practicesoftwaretesting.com/payment/check",
+					"protocol": "https",
 					"host": [
-						"{{baseUrl}}"
+						"api-with-bugs",
+						"practicesoftwaretesting",
+						"com"
 					],
 					"path": [
 						"payment",

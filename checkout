@@ -55,7 +55,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/payment/check"
+					"raw": "{{baseUrl}}/payment/check",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"payment",
+						"check"
+					]
 				}
 			},
 			"response": []

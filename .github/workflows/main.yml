@@ -19,25 +19,23 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Load environment variables
-        run: |
-          echo "Loading .env variables..."
-          cp env.json .env
+      - name: Install Newman
+        run: npm install -g newman
 
       - name: Run Checkout API tests
         run: |
-          echo "Running checkout API tests..."
-          node checkout --data checkout_data.csv
+          newman run checkout \
+            --environment env.json \
+            --iteration-data checkout_data.csv
 
-      - name: Run Invoice API tests
+      - name: Run Invoices API tests
         run: |
-          echo "Running invoices API tests..."
-          node invoices --data invoice_id.csv
+          newman run invoices \
+            --environment env.json \
+            --iteration-data invoice_id.csv
 
       - name: Run Favorites API tests
         run: |
-          echo "Running favorites API tests (linked with product_id.csv)..."
-          node favorites --data product_id.csv
+          newman run favorites \
+            --environment env.json \
+            --iteration-data product_id.csv

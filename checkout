@@ -55,7 +55,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/payment/check",
+					"raw": "{{baseUrl}}/payment/check"
 				}
 			},
 			"response": []

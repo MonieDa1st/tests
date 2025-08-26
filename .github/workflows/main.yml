@@ -1,43 +1,43 @@
-name: API Testing
+name: API Tests
 
 on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
-  test:
+  test-api:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Install Newman and HTML Reporter
-      run: |
-        npm install -g newman
-        npm install -g newman-reporter-html
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run Postman tests for Favorites API
-      run: newman run api-tests.json -d product_id.csv --environment env.json --reporters html --reporter-html-export newman/favorites-report.html
-      continue-on-error: true
+      - name: Load environment variables
+        run: |
+          echo "Loading .env variables..."
+          cp env.json .env
 
-    - name: Run Postman tests for Invoices API
-      run: newman run api-tests.json -d invoice_id.csv --environment env.json --reporters html --reporter-html-export newman/invoices-report.html
-      continue-on-error: true
+      - name: Run Checkout API tests
+        run: |
+          echo "Running checkout API tests..."
+          node checkout --data checkout_data.csv
 
-    - name: Run Postman tests for Payment/Check API
-      run: newman run api-tests.json -d checkout_data.csv --environment env.json --reporters html --reporter-html-export newman/payment-report.html
-      continue-on-error: true
+      - name: Run Invoice API tests
+        run: |
+          echo "Running invoices API tests..."
+          node invoices --data invoice_id.csv
 
-    - name: Upload test reports
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-reports
-        path: newman/*.html
+      - name: Run Favorites API tests
+        run: |
+          echo "Running favorites API tests (linked with product_id.csv)..."
+          node favorites --data product_id.csv

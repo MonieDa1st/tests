@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "fe1291a8-d302-4cc0-9765-e7fb953f8c4f",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47902768",
+		"_collection_link": "https://my-inh-l-m-huy-n-s-team-110567.postman.co/workspace/Team-Workspace~4e48fd56-87ad-4f79-8d91-42ae42a640c0/collection/47902768-fe1291a8-d302-4cc0-9765-e7fb953f8c4f?action=share&source=collection_link&creator=47902768"
+	},
+	"item": [
+		{
+			"name": "payment/check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse response JSON\r",
+							"let jsonData;\r",
+							"try {\r",
+							"    jsonData = pm.response.json();\r",
+							"} catch (e) {\r",
+							"    pm.test(\"Response is valid JSON\", function () {\r",
+							"        pm.expect.fail(\"Response is not JSON: \" + e.message);\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"// Test 1: Status code phải là 200 (thành công)\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test 2: API phải trả về message hoặc success flag\r",
+							"pm.test(\"Response has success message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"    pm.expect(jsonData.message).to.be.oneOf([\"Payment was successful\"]);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"method\":\"{{payment_method}}\",\"account_name\":\"{{acc_name}}\",\"account_number\":\"{{acc_number}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/payment/check",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"API",
+						"public",
+						"payment",
+						"check"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

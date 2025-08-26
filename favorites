@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "1ef96d28-8335-4a41-a064-e16f104caa70",
+		"name": "favorites",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47902768",
+		"_collection_link": "https://my-inh-l-m-huy-n-s-team-110567.postman.co/workspace/Team-Workspace~4e48fd56-87ad-4f79-8d91-42ae42a640c0/collection/47902768-1ef96d28-8335-4a41-a064-e16f104caa70?action=share&source=collection_link&creator=47902768"
+	},
+	"item": [
+		{
+			"name": "favorites",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse response JSON\r",
+							"let jsonData;\r",
+							"try {\r",
+							"    jsonData = pm.response.json();\r",
+							"} catch (e) {\r",
+							"    pm.test(\"Response is valid JSON\", function () {\r",
+							"        pm.expect.fail(\"Response is not JSON: \" + e.message);\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"// Test: Check status code\r",
+							"pm.test(\"Check API status\", function () {\r",
+							"    if (pm.response.code === 200) {\r",
+							"        console.log(\"Success: Product created successfully\");\r",
+							"        pm.expect(pm.response.code).to.eql(200);\r",
+							"    } else if (pm.response.code === 422) {\r",
+							"        console.log(\"Failed: Product already exists\");\r",
+							"        pm.expect(pm.response.code).to.eql(422);\r",
+							"    } else {\r",
+							"        pm.expect.fail(\"Unexpected status code: \" + pm.response.code);\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"product_id\": \"{{product_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/favorites",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"API",
+						"public",
+						"favorites"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

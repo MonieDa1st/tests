@@ -25,17 +25,14 @@ jobs:
       - name: Run Checkout API tests
         run: |
           newman run checkout \
-            --environment env.json \
             --iteration-data checkout_data.csv
 
       - name: Run Invoices API tests
         run: |
           newman run invoices \
-            --environment env.json \
             --iteration-data invoice_id.csv
 
       - name: Run Favorites API tests
         run: |
-          newman run favorites \
-            --environment env.json \
+          newman run favorites \s
             --iteration-data product_id.csv

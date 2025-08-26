@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "78a380a0-3658-4d9a-b8f3-88f9c3919d3f",
+		"name": "My Collection",
+		"description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47902768",
+		"_collection_link": "https://my-inh-l-m-huy-n-s-team-110567.postman.co/workspace/Team-Workspace~4e48fd56-87ad-4f79-8d91-42ae42a640c0/collection/47902768-78a380a0-3658-4d9a-b8f3-88f9c3919d3f?action=share&source=collection_link&creator=47902768"
+	},
+	"item": [
+		{
+			"name": "favorites",
+			"item": [
+				{
+					"name": "favorites",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response JSON\r",
+									"let jsonData;\r",
+									"try {\r",
+									"    jsonData = pm.response.json();\r",
+									"} catch (e) {\r",
+									"    pm.test(\"Response is valid JSON\", function () {\r",
+									"        pm.expect.fail(\"Response is not JSON: \" + e.message);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// Test: Check status code\r",
+									"pm.test(\"Check API status\", function () {\r",
+									"    if (pm.response.code === 200) {\r",
+									"        console.log(\"Success: Product created successfully\");\r",
+									"        pm.expect(pm.response.code).to.eql(200);\r",
+									"    } else if (pm.response.code === 422) {\r",
+									"        console.log(\"Failed: Product already exists\");\r",
+									"        pm.expect(pm.response.code).to.eql(422);\r",
+									"    } else {\r",
+									"        pm.expect.fail(\"Unexpected status code: \" + pm.response.code);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L0FQSS9wdWJsaWMvdXNlcnMvbG9naW4iLCJpYXQiOjE3NTYxMzE3NzIsImV4cCI6MTc3MTczMTc3MiwibmJmIjoxNzU2MTMxNzcyLCJqdGkiOiI5TmRnUVZHaEwwOHRQUG1MIiwic3ViIjoiMTA4IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInJvbGUiOiJ1c2VyIn0.Gn2SpdB6smHlco3uE2P79s_DFwa8sXAwBZNIbcciQOo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"product_id\": \"{{product_id}}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/API/public/favorites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"API",
+								"public",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L0FQSS9wdWJsaWMvdXNlcnMvbG9naW4iLCJpYXQiOjE3NTYxMzE3NzIsImV4cCI6MTc3MTczMTc3MiwibmJmIjoxNzU2MTMxNzcyLCJqdGkiOiI5TmRnUVZHaEwwOHRQUG1MIiwic3ViIjoiMTA4IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInJvbGUiOiJ1c2VyIn0.Gn2SpdB6smHlco3uE2P79s_DFwa8sXAwBZNIbcciQOo",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "payment/check",
+			"item": [
+				{
+					"name": "payment/check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response JSON\r",
+									"let jsonData;\r",
+									"try {\r",
+									"    jsonData = pm.response.json();\r",
+									"} catch (e) {\r",
+									"    pm.test(\"Response is valid JSON\", function () {\r",
+									"        pm.expect.fail(\"Response is not JSON: \" + e.message);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// Test 1: Status code phải là 200 (thành công)\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test 2: API phải trả về message hoặc success flag\r",
+									"pm.test(\"Response has success message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"message\");\r",
+									"    pm.expect(jsonData.message).to.be.oneOf([\"Payment was successful\"]);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"method\":\"{{payment_method}}\",\"account_name\":\"{{acc_name}}\",\"account_number\":\"{{acc_number}}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/API/public/payment/check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"API",
+								"public",
+								"payment",
+								"check"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "invoices",
+			"item": [
+				{
+					"name": "invoices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Invoice API Response\", function () {\r",
+									"    if (pm.response.code === 200) {\r",
+									"        pm.expect(pm.response.code).to.eql(200);\r",
+									"        console.log(\"Success: Invoice exists\");\r",
+									"    } else if (pm.response.code === 400) {\r",
+									"        pm.expect(pm.response.code).to.eql(400);\r",
+									"        console.log(\"Failed: Invoice does not exist\");\r",
+									"    } else {\r",
+									"        pm.expect.fail(\"Unexpected status code: \" + pm.response.code);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L0FQSS9wdWJsaWMvdXNlcnMvbG9naW4iLCJpYXQiOjE3NTYxMzE3NzIsImV4cCI6MTc3MTczMTc3MiwibmJmIjoxNzU2MTMxNzcyLCJqdGkiOiI5TmRnUVZHaEwwOHRQUG1MIiwic3ViIjoiMTA4IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInJvbGUiOiJ1c2VyIn0.Gn2SpdB6smHlco3uE2P79s_DFwa8sXAwBZNIbcciQOo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/API/public/invoices/{{invoice_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"API",
+								"public",
+								"invoices",
+								"{{invoice_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "invoice_id",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

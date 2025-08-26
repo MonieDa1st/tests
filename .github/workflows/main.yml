@@ -1,0 +1,43 @@
+name: API Testing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install Newman and HTML Reporter
+      run: |
+        npm install -g newman
+        npm install -g newman-reporter-html
+
+    - name: Run Postman tests for Favorites API
+      run: newman run api-tests.json -d product_id.csv --environment env.json --reporters html --reporter-html-export newman/favorites-report.html
+      continue-on-error: true
+
+    - name: Run Postman tests for Invoices API
+      run: newman run api-tests.json -d invoice_id.csv --environment env.json --reporters html --reporter-html-export newman/invoices-report.html
+      continue-on-error: true
+
+    - name: Run Postman tests for Payment/Check API
+      run: newman run api-tests.json -d checkout_data.csv --environment env.json --reporters html --reporter-html-export newman/payment-report.html
+      continue-on-error: true
+
+    - name: Upload test reports
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-reports
+        path: newman/*.html
